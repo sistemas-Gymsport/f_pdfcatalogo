@@ -1,0 +1,197 @@
+.canvas {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 32px;
+  background-color: #e8eaee;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.canvas__stage {
+  position: relative;
+  flex-shrink: 0;
+  margin: auto;
+}
+
+.canvas__sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  box-shadow: 0 0 0 calc(1px / var(--zoom)) rgba(0, 0, 0, 0.08), 0 calc(10px / var(--zoom)) calc(30px / var(--zoom)) rgba(0, 0, 0, 0.12);
+}
+
+.canvas__margins {
+  position: absolute;
+  border: calc(1px / var(--zoom)) dashed rgba(246, 72, 81, 0.65);
+  pointer-events: none;
+  z-index: 100000;
+}
+
+.canvas__snap {
+  position: absolute;
+  z-index: 100001;
+  pointer-events: none;
+  background: #0ea5e9;
+}
+
+.canvas__snap--x {
+  top: 0;
+  bottom: 0;
+  width: calc(1px / var(--zoom));
+}
+
+.canvas__snap--y {
+  left: 0;
+  right: 0;
+  height: calc(1px / var(--zoom));
+}
+
+/* ---------------------------- Elementos ---------------------------- */
+.pdf-el {
+  cursor: move;
+}
+
+.pdf-el::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  outline: calc(1px / var(--zoom)) solid transparent;
+  transition: outline-color 80ms ease;
+}
+
+.pdf-el:hover::after {
+  outline-color: rgba(14, 165, 233, 0.7);
+}
+
+.pdf-el.is-selected::after {
+  outline: calc(1.5px / var(--zoom)) solid #0ea5e9;
+}
+
+.pdf-el.is-locked {
+  cursor: default;
+}
+
+.pdf-el.is-locked.is-selected::after {
+  outline-color: #9ca3af;
+  outline-style: dashed;
+}
+
+.pdf-el.is-hidden {
+  opacity: 0.25;
+}
+
+.pdf-el.is-editing {
+  cursor: text;
+}
+
+.pdf-el.is-editing::after {
+  outline: calc(1.5px / var(--zoom)) dashed #0ea5e9;
+}
+
+/* Marco de selección (siempre encima) */
+.selection-overlay {
+  outline: calc(1.5px / var(--zoom)) solid #0ea5e9;
+}
+
+.selection-overlay__rotated {
+  position: absolute;
+  inset: 0;
+  outline: calc(1.5px / var(--zoom)) dashed #0ea5e9;
+  pointer-events: none;
+}
+
+.selection-overlay__size {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px / var(--zoom));
+  transform-origin: top center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #0ea5e9;
+  color: #fff;
+  font: 600 11px/1.3 var(--font-ui);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.pdf-el__handle::after {
+  content: '';
+  position: absolute;
+  inset: 25%;
+  background: #fff;
+  border: calc(1.5px / var(--zoom)) solid #0ea5e9;
+  border-radius: calc(2px / var(--zoom));
+}
+
+.pdf-el__handle--edge::after {
+  inset: 0;
+  margin: auto;
+  width: calc(10px / var(--zoom));
+  height: calc(10px / var(--zoom));
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.pdf-el__handle--edge:hover::after {
+  opacity: 1;
+}
+
+.pdf-el.is-overflowing::after {
+  outline: calc(1px / var(--zoom)) dashed #dc2626;
+}
+
+.pdf-el__overflow {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform-origin: bottom left;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #dc2626;
+  color: #fff;
+  font: 600 10px/1.4 var(--font-ui);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.pdf-el__lock {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #374151;
+  color: #fff;
+  transform-origin: top right;
+  pointer-events: none;
+}
+
+/* Edición de texto en línea: hereda la tipografía del elemento */
+.pdf-el__editor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background: rgba(14, 165, 233, 0.06);
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}

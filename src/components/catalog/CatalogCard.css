@@ -1,0 +1,128 @@
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.catalog-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.catalog-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.catalog-card__cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 210px;
+  background: linear-gradient(180deg, var(--surface-3), #e9ebef);
+  color: var(--text-faint);
+  overflow: hidden;
+}
+
+.catalog-card__open {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  background: rgba(17, 24, 39, 0.75);
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transform: translateY(100%);
+  transition: transform var(--transition);
+}
+
+.catalog-card__cover:hover .catalog-card__open,
+.catalog-card__cover:focus-visible .catalog-card__open {
+  transform: translateY(0);
+}
+
+.catalog-card__cover:hover {
+  text-decoration: none;
+}
+
+.catalog-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 10px;
+  flex: 1;
+}
+
+.catalog-card__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.catalog-card__title {
+  font-size: var(--fs-md);
+  font-weight: 650;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalog-card__title a {
+  color: var(--text);
+}
+
+.catalog-card__colors {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.catalog-card__colors span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  margin-left: -4px;
+}
+
+.catalog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: var(--fs-xs);
+}
+
+.catalog-card__date {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.catalog-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+}
+
+.catalog-card__actions .btn--primary {
+  margin-right: auto;
+}
+
+.catalog-card__delete:hover:not(:disabled) {
+  background: var(--danger-soft) !important;
+  color: var(--danger) !important;
+}

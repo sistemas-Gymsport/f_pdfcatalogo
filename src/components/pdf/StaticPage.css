@@ -1,0 +1,13 @@
+.static-page {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), var(--shadow-sm);
+  pointer-events: none;
+  user-select: none;
+}
+
+.static-page__sheet {
+  transform-origin: 0 0;
+}

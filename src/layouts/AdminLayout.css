@@ -1,0 +1,47 @@
+.admin {
+  min-height: 100%;
+}
+
+.admin__main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+}
+
+.admin__mobile-header {
+  display: none;
+}
+
+.admin__content {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 32px 64px;
+}
+
+@media (max-width: 1024px) {
+  .admin__main {
+    margin-left: 0;
+  }
+
+  .admin__mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: var(--header-height);
+    padding: 0 12px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .admin__content {
+    padding: 24px 20px 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin__content {
+    padding: 20px 16px 40px;
+  }
+}
